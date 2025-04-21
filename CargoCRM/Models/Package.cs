@@ -1,8 +1,7 @@
 ﻿namespace CargoCRM.Models;
 
-public class Package
+public class Package : EntityBase
 {
-    public int Id { get; set; }
     public string Name { get; set; }
     public int Id_trackcode { get; set; }
     public bool Is_sent { get; set; }
