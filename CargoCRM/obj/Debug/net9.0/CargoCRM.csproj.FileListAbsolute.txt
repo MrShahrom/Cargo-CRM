@@ -34,3 +34,4 @@ C:\Users\Shahrom Developer\RiderProjects\CargoCRM\CargoCRM\obj\Debug\net9.0\refi
 C:\Users\Shahrom Developer\RiderProjects\CargoCRM\CargoCRM\obj\Debug\net9.0\CargoCRM.pdb
 C:\Users\Shahrom Developer\RiderProjects\CargoCRM\CargoCRM\obj\Debug\net9.0\CargoCRM.genruntimeconfig.cache
 C:\Users\Shahrom Developer\RiderProjects\CargoCRM\CargoCRM\obj\Debug\net9.0\ref\CargoCRM.dll
+C:\Users\Shahrom Developer\RiderProjects\CargoCRM\CargoCRM\obj\Debug\net9.0\CargoCRM.sourcelink.json
