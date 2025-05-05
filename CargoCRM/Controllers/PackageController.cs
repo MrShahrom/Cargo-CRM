@@ -35,6 +35,35 @@ namespace CargoCRM.Controller
         {
             return Packages;
         }
+        
+        [HttpGet("{id:int}")]
+        public IActionResult GetById(int id)
+        {
+            var package = Packages.FirstOrDefault(x => x.Id == id);
+            if (package is null)
+            {
+                return NotFound();
+            }
+            return Ok(package);
+        }
+
+        [HttpPost]
+        public IActionResult Test()
+        {
+            return Ok("Test Post");
+        }
+
+        [HttpPut]
+        public IActionResult TestPut()
+        {
+            return Ok("Test Updated");
+        }
+
+        [HttpDelete]
+        public IActionResult Delete()
+        {
+            return Ok("Test Deleted");
+        }
     }
 }
 

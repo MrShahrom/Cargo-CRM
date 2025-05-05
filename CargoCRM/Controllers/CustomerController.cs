@@ -31,6 +31,35 @@ namespace CargoCRM.Controller
         {
             return Customers;
         }
+
+        [HttpGet("{id:int}")]
+        public IActionResult GetById(int id)
+        {
+            var customer = Customers.FirstOrDefault(x => x.Id == id);
+            if (customer is null)
+            {
+                return NotFound();
+            }
+            return Ok(customer);
+        }
+
+        [HttpPost]
+        public IActionResult Test()
+        {
+            return Ok("Test Post");
+        }
+
+        [HttpPut]
+        public IActionResult TestPut()
+        {
+            return Ok("Test Updated");
+        }
+
+        [HttpDelete]
+        public IActionResult Delete()
+        {
+            return Ok("Test Deleted");
+        }
     }
 }
 

@@ -30,6 +30,35 @@ namespace CargoCRM.Controller
         {
             return TrackCodes;
         }
+        
+        [HttpGet("{id:int}")]
+        public IActionResult GetById(int id)
+        {
+            var trackCode = TrackCodes.FirstOrDefault(x => x.Id == id);
+            if (trackCode is null)
+            {
+                return NotFound();
+            }
+            return Ok(trackCode);
+        }
+
+        [HttpPost]
+        public IActionResult Test()
+        {
+            return Ok("Test Post");
+        }
+
+        [HttpPut]
+        public IActionResult TestPut()
+        {
+            return Ok("Test Updated");
+        }
+
+        [HttpDelete]
+        public IActionResult Delete()
+        {
+            return Ok("Test Deleted");
+        }
     }
 }
 
