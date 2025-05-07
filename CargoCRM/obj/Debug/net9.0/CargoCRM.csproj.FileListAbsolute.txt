@@ -257,3 +257,4 @@ C:\Users\Sh_Bobojonov\RiderProjects\Cargo-CRM\CargoCRM\obj\Debug\net9.0\refint\C
 C:\Users\Sh_Bobojonov\RiderProjects\Cargo-CRM\CargoCRM\obj\Debug\net9.0\CargoCRM.pdb
 C:\Users\Sh_Bobojonov\RiderProjects\Cargo-CRM\CargoCRM\obj\Debug\net9.0\CargoCRM.genruntimeconfig.cache
 C:\Users\Sh_Bobojonov\RiderProjects\Cargo-CRM\CargoCRM\obj\Debug\net9.0\ref\CargoCRM.dll
+C:\Users\Sh_Bobojonov\RiderProjects\Cargo-CRM\CargoCRM\bin\Debug\net9.0\BCrypt.Net-Next.dll
