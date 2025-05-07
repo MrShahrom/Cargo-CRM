@@ -13,7 +13,7 @@ using System.Reflection;
 [assembly: System.Reflection.AssemblyCompanyAttribute("CargoCRM")]
 [assembly: System.Reflection.AssemblyConfigurationAttribute("Debug")]
 [assembly: System.Reflection.AssemblyFileVersionAttribute("1.0.0.0")]
-[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+58a4f0c79313c32c504e5c49ac99301973e0a28e")]
+[assembly: System.Reflection.AssemblyInformationalVersionAttribute("1.0.0+6906304959b1d687399f4e3155909518b01abeba")]
 [assembly: System.Reflection.AssemblyProductAttribute("CargoCRM")]
 [assembly: System.Reflection.AssemblyTitleAttribute("CargoCRM")]
 [assembly: System.Reflection.AssemblyVersionAttribute("1.0.0.0")]
