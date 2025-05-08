@@ -5,7 +5,7 @@ namespace CargoCRM.Extensions;
 
 public static class UserExtensions
 {
-    public static UserDto ToUserDto(this User user)
+    public static UserDto ToDto(this User user)
     {
         return new UserDto
         {
@@ -15,4 +15,13 @@ public static class UserExtensions
             Role = user.Role
         };
     }
+
+    // public static PackageDto ToDto(this Package package)
+    // {
+    //     return new PackageDto
+    //     {
+    //         Id = package.Id,
+    //         
+    //     }
+    // }
 }

@@ -1,6 +1,7 @@
 ﻿using CargoCRM.DTOs.UserDTOs;
 using CargoCRM.Extensions;
 using CargoCRM.Models;
+using CargoCRM.Repositories;
 using Microsoft.AspNetCore.Mvc;
 
 namespace CargoCRM.Controller
@@ -9,48 +10,29 @@ namespace CargoCRM.Controller
     [ApiController]
     public class UserContoller : ControllerBase
     {
-        private static readonly List<User> Users =
-        [
-            new User
-            {
-                Id = 1,
-                Username = "admin",
-                Password = "123456",
-                Role = "Admin"
-            },
-            new User()
-            {
-                Id = 2,
-                Username = "Abdu",
-                Password = "123456",
-                Role = "User"
-            }
-        ];
-
-        [HttpGet(Name = "GetAllUsers")]
-        public IEnumerable<UserDto> GetAll()
+        [HttpGet(Name = "GetAll")]
+        public IEnumerable<UserDto> GetAll([FromServices] IUserRepository repository)
         {
-            return Users.Select(u => u.ToUserDto());
+            return repository.GetAll().Select(x => x.ToDto());
         }
         
         [HttpGet("{id:int}")]
-        public IActionResult GetById(int id)
+        public IActionResult GetById(int id, [FromServices] IUserRepository repository)
         {
-            var user = Users.FirstOrDefault(x => x.Id == id);
-            if (user is null)
-            {
+            var serversideUser = repository.GetById(id);
+            if (serversideUser is null)
                 return NotFound();
-            }
-            return Ok(user.ToUserDto());
+            return Ok(serversideUser.ToDto());
         }
 
         [HttpPost]
-        public IActionResult Create(CreateUser createUser)
+        public IActionResult Create(CreateUser createUser, [FromServices] IUserRepository repository)
         {
             if (createUser is null)
                 return BadRequest("User is null");
-            
-            var newId = Users.Max(x => x.Id) + 1;
+            var newId = repository.GetAll().Any() 
+                ? repository.GetAll().Max(u => u.Id) + 1 
+                : 1;
             var createdUser = new User
             {
                 Id = newId,
@@ -58,18 +40,18 @@ namespace CargoCRM.Controller
                 Password = createUser.Password,
                 Role = createUser.Role
             };
-            Users.Add(createdUser);
+            repository.Add(createdUser);
             
-            return Created($"api/user/{createdUser.Id}", createdUser.ToUserDto());
+            return Created($"api/user/{createdUser.Id}", createdUser.ToDto());
         }
 
         [HttpPut]
-        public IActionResult Update(int id, UpdateUser updateUser)
+        public IActionResult Update(int id, UpdateUser updateUser, [FromServices] IUserRepository repository)
         {
             if (updateUser is null)
                 return BadRequest("User is null");
 
-            var serversideUser = Users.SingleOrDefault(x => x.Id == id);
+            var serversideUser = repository.GetById(id);
             if (serversideUser is null)
                 return NotFound();
             
@@ -77,16 +59,18 @@ namespace CargoCRM.Controller
             serversideUser.Password = updateUser.Password;
             serversideUser.Role = updateUser.Role;
             
-            return Ok(serversideUser.ToUserDto());
+            repository.TryUpdate(id, serversideUser);
+            
+            return Ok(serversideUser.ToDto());
         }
 
         [HttpPatch]
-        public IActionResult UpdateSpecificProperties(int id, PatchUpdateUser updateUser)
+        public IActionResult UpdateSpecificProperties(int id, PatchUpdateUser updateUser, [FromServices] IUserRepository repository)
         {
             if (updateUser is null)
                 return BadRequest("User is null");
             
-            var serversideUser = Users.SingleOrDefault(x => x.Id == id);
+            var serversideUser = repository.GetById(id);
             if (serversideUser is null)
                 return NotFound();
             
@@ -102,17 +86,17 @@ namespace CargoCRM.Controller
                         oldProperty.SetValue(serversideUser, value);
                 }
             }
-            return Ok(serversideUser.ToUserDto());
+            return Ok(serversideUser.ToDto());
         }
         
         [HttpDelete]
-        public IActionResult Delete(int id)
+        public IActionResult Delete(int id, [FromServices] IUserRepository repository)
         {
-            var serversideUser = Users.SingleOrDefault(x => x.Id == id);
-            if (serversideUser is null)
+            var deletedUser = repository.Delete(id);
+            if (deletedUser is null)
                 return NotFound();
-            Users.Remove(serversideUser);
-            return Ok($"User with id {id} was deleted");
+            
+            return Ok(deletedUser.ToDto());
         }
     }
 }
